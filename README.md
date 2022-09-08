@@ -197,40 +197,59 @@ ______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| clinicNo |fixed length character string length 5, NOT NULL |__Primary Key__|
+| clinicNo |integer value, NOT NULL |__Primary Key__|
 | street   |variable length character string, NOT NULL|
 | city     |variable length character string, NOT NULL|
 | state   | variable length character string, NOT NULL| Enumerated Type?|
-| zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY, Alternate Key|
+| zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY, Alternate Key |
 | telNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
-| faxNo    |variable length character data| Alternate Key|
-| mgrStaffNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Staff(staffNo)__|
+| faxNo    |variable length character string| Alternate Key|
+| mgrStaffNo   |fixed length character string length 5 | __Foreign Key references Staff(staffNo)__|
 
-**Staff** (sex, SSN, position,
-salary, clinicNo)
-Alternate Key SSN
-| staffNo |fixed length character string length 5, NOT NULL |__Primary Key__|
+**Staff** 
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| staffNo | integer value, NOT NULL |__Primary Key__|
 | sFName   |variable length character string, NOT NULL|
 | sLName     |variable length character string, NOT NULL|
 | sCity   |variable length character string, NOT NULL|
 | sState   | variable length character string, NOT NULL| Enumerated Type?|
 | sZipCode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
 | sTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
+| DOB   |date, NOT NULL|
+| SSN    |integer value, NOT NULL| Alternate Key|
+| position     |variable length character string, NOT NULL|
+| salary     |integer value, >0 |
+| clinicNo   |integer value | __Foreign Key references Clinic(clinicNo)__|
 
-| clinicNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+**Examination**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| examNo |integer value, NOT NULL |__Primary Key__|
+| examDate   |date, NOT NULL|
+| examTime     |integer value, NOT NULL | 
+| examResults   | variable length character string, NOT NULL|
+| petNo   | integer value, NOT NULL | __Foreign Key references Pet(petNo)|
+| staffNo   | integer value, NOT NULL | __Foreign Key references Staff(staffNo)|
+
+
 
 
 **PetOwner**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| ownerNo |fixed length character string length 5, NOT NULL |__Primary Key__|
+| ownerNo |integer value, NOT NULL |__Primary Key__|
 | oFName   |variable length character string, NOT NULL|
 | oLName     |variable length character string, NOT NULL|
 | oState   | variable length character string, NOT NULL| Enumerated Type?|
 | zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
 | oTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX|
 | clinicNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+
+
 
 
 
