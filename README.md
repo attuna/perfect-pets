@@ -7,6 +7,8 @@ __________________
 _______________
 # Data requirements:
 
+
+
 ##  Veterinary clinics
 PerfectPets has many veterinary clinics located in the main cities of the US. The
 details of each clinic include the clinic number, clinic address (consisting of the
@@ -188,7 +190,6 @@ ______________
 |Stock: Item| itemNo, itemName, itemDescription, itemCost|
 |Stock: Pharmacy| drugNo, drugName, drugDescription, dosage, methodAdmin, drugCost|
 |Appointment |appNo, aDate, aTime|
-|PetTreatment |startDate, endDate, quantity, ptComments|
 
 
 # Entities
@@ -204,7 +205,7 @@ ______________
 | zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY, Alternate Key |
 | telNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
 | faxNo    |variable length character string| Alternate Key|
-| mgrStaffNo   |fixed length character string length 5 | __Foreign Key references Staff(staffNo)__|
+| mgrStaffNo   |integer value | __Foreign Key references Staff(staffNo)__|
 
 **Staff** 
 
@@ -229,12 +230,10 @@ ______________
 | ---------------- | ------------- | ------------- |
 | examNo |integer value, NOT NULL |__Primary Key__|
 | examDate   |date, NOT NULL|
-| examTime     |integer value, NOT NULL | 
+| examTime     |time, NOT NULL | 
 | examResults   | variable length character string, NOT NULL|
-| petNo   | integer value, NOT NULL | __Foreign Key references Pet(petNo)|
-| staffNo   | integer value, NOT NULL | __Foreign Key references Staff(staffNo)|
-
-
+| petNo   | integer value, NOT NULL | __Foreign Key references Pet(petNo)__|
+| staffNo   | integer value, NOT NULL | __Foreign Key references Staff(staffNo)__|
 
 
 **PetOwner**
@@ -247,9 +246,87 @@ ______________
 | oState   | variable length character string, NOT NULL| Enumerated Type?|
 | zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
 | oTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX|
-| clinicNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+| clinicNo   |integer value, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
 
 
+
+**Pet**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| petNo |integer value, NOT NULL |__Primary Key__|
+| petName   |variable length character string, NOT NULL|
+| petType     |variable length character string, NOT NULL|
+| petDescription   | variable length character string, NOT NULL|
+| pDOB   |date, NOT NULL|
+| dateRegistered   |date, NOT NULL|
+| petStatus|  boolean | indicating whether pen is healthy (1) or sick (0)|
+| clinicNo   |integer value, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+| ownerNo   |integer value, NOT NULL| __Foreign Key references Owner(ownerNo)__|
+
+
+**Treatment**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| treatNo |integer value, NOT NULL |__Primary Key__|
+| description   |variable length character string, NOT NULL|
+| cost      |integer value, >0 |
+
+
+
+**Pen**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| penNo |integer value, NOT NULL |__Primary Key__|
+| penCapacity   |integer value, NOT NULL, DEFAULT 2, >=1 and <=4|
+| penStatus     | boolean | indicating whether pen is available (1) or not available (0)|
+| clinicNo   |integer value, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+
+
+**Pharmacy**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| drugNo |integer value, NOT NULL |__Primary Key__|
+| drugName   |variable length character string, NOT NULL|
+| drugDescription   | variable length character string, NOT NULL|
+| dosage   | variable length character string, NOT NULL|
+| methodAdmin|  boolean | on prescription (1) or without (0)|
+| drugCost |integer value, >0 |
+
+
+**Item**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| itemNo |integer value, NOT NULL |__Primary Key__|
+| itemName   |variable length character string, NOT NULL|
+| itemDescription   | variable length character string, NOT NULL|
+| itemCost  |integer value, >0 |
+
+
+**Appointment**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| appNo |integer value, NOT NULL |__Primary Key__|
+| aDate   |date, NOT NULL|
+| aTime   |time, NOT NULL|
+| clinicNo   |integer value, NOT NULL| __Foreign Key references Pet(petNo)__|
+
+
+**Invoice**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| invoiceNo |integer value, NOT NULL |__Primary Key__|
+| invoiceDate   |date, NOT NULL|
+| datePaid   |date, NOT NULL|
+| paymentMethod   | variable length character string, NOT NULL| Enumerated Type?|
+| examNo   |integer value, NOT NULL| __Foreign Key references Examination(examNo)__|
+| ownerNo   |integer value, NOT NULL| __Foreign Key references Owner(ownerNo)__|
 
 
 
