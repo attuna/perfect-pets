@@ -124,18 +124,88 @@ _________________
 
 
 ______________________
-# Transaction requirements: 
+# Requirements: 
 
-1. Compulsory functional requirements
+1. **Compulsory functional requirements:**
    - User Authorization
    - User Management (CRUD)
    - Role System
    - Logging
 
-2. 
+2. **The database should be capable of supporting the following maintenance
+transactions:**
+   - Create and maintain records recording the details of PerfectPets clinics
+and the members of staff at each clinic.
+   - Create and maintain records recording the details of pet owners.
+   - Create and maintain the details of pets.
+   - Create and maintain records recording the details of the types of treatments available for pets.
+   - Create and maintain records recording the details of examinations and
+treatments given to pets.
+   - Create and maintain records recording the details of invoices to pet
+   owners for treatment to their pets.
+   - Create and maintain records recording the details of surgical, non-surgical, and pharmaceutical supplies at each clinic.
+   - Create and maintain records recording the details of pens available at
+   each clinic and the allocation of pets to pens.
+   - Create and maintain pet owner/pet appointments at each clinic.
 
+3. **The database should be capable of supporting the following example query
+transactions:**
+   - Present a report listing the Manager’s name, clinic address, and telephone number for each clinic, ordered by clinic number.
+   - Present a report listing the names and owner numbers of pet owners
+   with the details of their pets.
+   - List the historic details of examinations for a given pet.
+   - List the details of the treatments provided to a pet based on the results
+   of a given examination.
+   - List the details of an unpaid invoice for a given pet owner.
+   - List the details of pens available on a given date for clinics in New York,
+   ordered by clinic number.
+   - Present a report that provides the total monthly salary for staff at each
+   clinic, ordered by clinic number.
+   - List the maximum, minimum, and average cost for treatments.
+   - List the total number of pets in each pet type, ordered by pet type.
+   - List the appointments for a given date and for a particular clinic.
+   - List the total number of pens in each clinic, ordered by clinic number.
+   - List the pet number, name, and description of pets owned by a particular owner.
+   - Present a report listing the pharmaceutical supplies that need to be
+   reordered at each clinic, ordered by clinic number.
 _______________
 # Database Design
 ![image](https://user-images.githubusercontent.com/93200268/189105002-7d5a07c5-8747-4dea-8a82-3c62dc73f68f.png)
 ______________
+
+# Attributes associated with entities:
+
+|Entity|   Attributes|
+| ---------- | ----------|
+|Clinic |clinicNo, address (street, city, state, zipCode), telNo, faxNo|
+|Staff |staffNo, sName (sFName, sLName), sAddress (sStreet, sCity, sState, sZipCode), sTelNo, DOB, sex, SSN, position, salary|
+|PetOwner |ownerNo, oName (oFName, oLName), oAddress (oStreet, oCity, oState, oZipCode), oTelNo|
+|Pet |petNo, petName, petType, petDescription, pDOB, dateRegistered, petStatus|
+|Examination |examNo, examDate, examTime, examResults|
+|Treatment |treatNo, description, cost|
+|Pen |penNo, penCapacity, penStatus|
+|Invoice |invoiceNo, invoiceDate, datePaid, paymentMethod|
+|Stock: Item| itemNo, itemName, itemDescription, itemCost|
+|Stock: Pharmacy| drugNo, drugName, drugDescription, dosage, methodAdmin, drugCost|
+|Appointment |appNo, aDate, aTime|
+|PetTreatment |startDate, endDate, quantity, ptComments|
+
+
+# Entities
+
+**Clinic**
+
+__Primary Key clinicNo__
+
+__Foreign Key mgrStaffNo references Staff(staffNo)__
+
+- clinicNo fixed length character string length 5, NOT NULL
+- street   variable length character data, NOT NULL
+- city     variable length character data, NOT NULL
+- state    variable length character data, NOT NULL
+- zipcode  fixed length character string length 5, NOT NULL
+- telNo    fixed length character data, NOT NULL [+1 (three-digit area code) XXX-XXXX]
+- faxNo    variable length character data
+- mgrStaffNo   fixed length character string length 5, NOT NULL
+
 
