@@ -1,8 +1,11 @@
 # Perfect pets
 Perfect pets provides private health care for domestic pets throughout the US. This service is provided through various clinics located in the main cities of the US. The director of PerfectPets is concerned that there is a lack of communication within the practice and particularly in the sharing of information and resources across the various clinics. To resolve this problem the director has requested the creation of a centralized database system to assist in the more effective and efficient running of the practice. 
 
+__________________
+![My Remote Image](https://static01.nyt.com/images/2016/08/05/us/05onfire1_xp/05onfire1_xp-superJumbo-v2.jpg?quality=75&auto=webp)
+
 _______________
-# Requirements:
+# Data requirements:
 
 ##  Veterinary clinics
 PerfectPets has many veterinary clinics located in the main cities of the US. The
@@ -42,12 +45,13 @@ PerfectPets provides various treatments for all types of pets. These treatments 
 provided at a standard rate across all clinics. The details of each treatment
 include a treatment number, a full description of the treatment, and the cost to
 the pet owner. For example, treatments include:
-T123 Penicillin antibiotic course $50.00
-T155 Feline hysterectomy $200.00
-T112 Vaccination course against feline flu $70.00
-T56 Small dog – stay in pen per day (includes feeding) $20.00
-A standard rate of $20.00 is charged for each examination, which is recorded
-as a type of treatment. The treatment number uniquely identifies each type of
+- T123 Penicillin antibiotic course $50.00
+- T155 Feline hysterectomy $200.00
+- T112 Vaccination course against feline flu $70.00 
+- T56 Small dog – stay in pen per day (includes feeding) $20.00 
+
+*A standard rate of **$20.00** is charged for each examination, which is recorded
+as a type of treatment*. The treatment number uniquely identifies each type of
 treatment and is used by all PerfectPets clinics.
 
 ## Pet treatments
@@ -117,3 +121,21 @@ _________________
 - Invoice 
 - Appointment
 - Stock (with specializations Surgical, NonSurgical, and Pharmaceuticals)
+
+
+______________________
+# Transaction requirements: 
+
+1. Compulsory functional requirements
+   - User Authorization
+   - User Management (CRUD)
+   - Role System
+   - Logging
+
+2. 
+
+_______________
+# Database Design
+![image](https://user-images.githubusercontent.com/93200268/189105002-7d5a07c5-8747-4dea-8a82-3c62dc73f68f.png)
+______________
+
