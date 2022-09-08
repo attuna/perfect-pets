@@ -195,17 +195,43 @@ ______________
 
 **Clinic**
 
-__Primary Key clinicNo__
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| clinicNo |fixed length character string length 5, NOT NULL |__Primary Key__|
+| street   |variable length character string, NOT NULL|
+| city     |variable length character string, NOT NULL|
+| state   | variable length character string, NOT NULL| Enumerated Type?|
+| zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY, Alternate Key|
+| telNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
+| faxNo    |variable length character data| Alternate Key|
+| mgrStaffNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Staff(staffNo)__|
 
-__Foreign Key mgrStaffNo references Staff(staffNo)__
+**Staff** (sex, SSN, position,
+salary, clinicNo)
+Alternate Key SSN
+| staffNo |fixed length character string length 5, NOT NULL |__Primary Key__|
+| sFName   |variable length character string, NOT NULL|
+| sLName     |variable length character string, NOT NULL|
+| sCity   |variable length character string, NOT NULL|
+| sState   | variable length character string, NOT NULL| Enumerated Type?|
+| sZipCode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
+| sTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
 
-- clinicNo fixed length character string length 5, NOT NULL
-- street   variable length character data, NOT NULL
-- city     variable length character data, NOT NULL
-- state    variable length character data, NOT NULL
-- zipcode  fixed length character string length 5, NOT NULL
-- telNo    fixed length character data, NOT NULL [+1 (three-digit area code) XXX-XXXX]
-- faxNo    variable length character data
-- mgrStaffNo   fixed length character string length 5, NOT NULL
+| clinicNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+
+
+**PetOwner**
+
+|   Column         |   Description   |   Additional info      | 
+| ---------------- | ------------- | ------------- |
+| ownerNo |fixed length character string length 5, NOT NULL |__Primary Key__|
+| oFName   |variable length character string, NOT NULL|
+| oLName     |variable length character string, NOT NULL|
+| oState   | variable length character string, NOT NULL| Enumerated Type?|
+| zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
+| oTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX|
+| clinicNo   |fixed length character data length 5, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+
+
 
 
