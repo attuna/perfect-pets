@@ -199,20 +199,20 @@ _______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| clinic_id |serial, NOT NULL |__Primary Key__|
 | street   |VARCHAR(50), NOT NULL|
 | city     |VARCHAR(50), NOT NULL|
 | state   |VARCHAR(50), NOT NULL| Enumerated Type?|
 | zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY, Alternate Key |
 | tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
 | fax    |VARCHAR(50), NOT NULL| Alternate Key|
-| clinic_id   || __Foreign Key references Staff(id)__|
+| staff   || __Foreign Key references Staff(staff_id)__|
 
 ### **Staff** 
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| staff_id |serial, NOT NULL |__Primary Key__|
 | first_name   |VARCHAR(50), NOT NULL|
 | last_name     |VARCHAR(50), NOT NULL|
 | city   |VARCHAR(50), NOT NULL|
@@ -223,53 +223,53 @@ _______________
 | SSN    |CHAR(6), NOT NULL| Alternate Key|
 | position     |VARCHAR(50), NOT NULL|
 | salary     |serial, NOT NULL  |
-| clinic_id   | | __Foreign Key references Clinic(id)__|
+| clinic   | | __Foreign Key references Clinic(clinic_id)__|
 
 ### **Examination**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| exam_id |serial, NOT NULL |__Primary Key__|
 | date   |DATE, NOT NULL|
 | time     |TIME, NOT NULL | 
 | results   | VARCHAR(500), NOT NULL|
-| pet_id   | | __Foreign Key references Pet(id)__|
-| staff_id   | | __Foreign Key references Staff(id)__|
+| pet   | | __Foreign Key references Pet(pet_id)__|
+| staff   | | __Foreign Key references Staff(staff_id)__|
 
 
 ### **PetOwner**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| owner_id |serial, NOT NULL |__Primary Key__|
 | first_name   | VARCHAR(50), NOT NULL|
 | last_name     | VARCHAR(50), NOT NULL|
 | state   |  VARCHAR(50), NOT NULL| Enumerated Type?|
 | zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY|
 | tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
-| clinic_id   | | __Foreign Key references Clinic(id)__|
+| clinic   | | __Foreign Key references Clinic(clinic_id)__|
 
 
 ### **Pet**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| pet_id |serial, NOT NULL |__Primary Key__|
 | name   |VARCHAR(50), NOT NULL|
 | type     |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(150)|
 | DOB   |DATE, NOT NULL|
 | date_registered   |DATE, NOT NULL|
 | status|  CHAR(1), NOT NULL| indicating whether pen is healthy (H) or sick (S), default H|
-| clinic_id   || __Foreign Key references Clinic(id)__|
-| owner_id   || __Foreign Key references Owner(id)__|
+| clinic   || __Foreign Key references Clinic(clinic_id)__|
+| owner   || __Foreign Key references Owner(owner_id)__|
 
 
 ### **Treatment**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| tratment_id |serial, NOT NULL |__Primary Key__|
 | description   |VARCHAR(1500), NOT NULL|
 | cost      |serial, NOT NULL|
 
@@ -279,17 +279,17 @@ _______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| pen_id |serial, NOT NULL |__Primary Key__|
 | capacity   |serial, NOT NULL, DEFAULT 2, >=1 and <=4|
 | status     | CHAR(1), NOT NULL | indicating whether pen is available (A) or not available (N), default A|
-| clinic_id   || __Foreign Key references Clinic(id)__|
+| clinic   || __Foreign Key references Clinic(clinic_id)__|
 
 
 ### **Pharmacy**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| pharmacy_id |serial, NOT NULL |__Primary Key__|
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
 | dosage   | VARCHAR(150), NOT NULL|
@@ -301,7 +301,7 @@ _______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| item_id |serial, NOT NULL |__Primary Key__|
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
 | cost |serial, NOT NULL|
@@ -311,22 +311,22 @@ _______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6),  NOT NULL |__Primary Key__|
+| appointment_id |serialr,  NOT NULL |__Primary Key__|
 | date   |DATE, NOT NULL|
 | time   |TIME, NOT NULL|
-| pet_id   || __Foreign Key references Pet(id)__|
+| pet   || __Foreign Key references Pet(pet_id)__|
 
 
 ### **Invoice**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| id |CHAR(6), NOT NULL |__Primary Key__|
+| invoice_id |serial, NOT NULL |__Primary Key__|
 | date   |DATE, NOT NULL|
 | date_paid   |DATE, NOT NULL|
 | payment_method   |VARCHAR(50),  NOT NULL| Enumerated Type?|
-| exam_id   || __Foreign Key references Examination(id)__|
-| owner_id   || __Foreign Key references Owner(id)__|
+| exam  || __Foreign Key references Examination(exam_id)__|
+| owner   || __Foreign Key references Owner(owner_id)__|
 
 
 
