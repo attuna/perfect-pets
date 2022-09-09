@@ -222,7 +222,7 @@ _______________
 | DOB   |DATE, NOT NULL|
 | SSN    |CHAR(6), NOT NULL| Alternate Key|
 | position     |VARCHAR(50), NOT NULL|
-| salary     |serial, NOT NULL  |
+| salary     |integer,>0, NOT NULL  |
 | clinic   | | __Foreign Key references Clinic(clinic_id)__|
 
 ### **Examination**
@@ -271,7 +271,7 @@ _______________
 | ---------------- | ------------- | ------------- |
 | tratment_id |serial, NOT NULL |__Primary Key__|
 | description   |VARCHAR(1500), NOT NULL|
-| cost      |serial, NOT NULL|
+| cost      |integer, >0, NOT NULL|
 
 
 
@@ -280,7 +280,7 @@ _______________
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
 | pen_id |serial, NOT NULL |__Primary Key__|
-| capacity   |serial, NOT NULL, DEFAULT 2, >=1 and <=4|
+| capacity   |integer, NOT NULL, DEFAULT 2, >=1 and <=4|
 | status     | CHAR(1), NOT NULL | indicating whether pen is available (A) or not available (N), default A|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
 
@@ -294,7 +294,7 @@ _______________
 | description   | VARCHAR(1500), NOT NULL |
 | dosage   | VARCHAR(150), NOT NULL|
 | method_admin|  CHAR(1), NOT NULL |	indicating whether drug is available on prescription (O) or without (W)|
-| cost |serial, NOT NULL|
+| cost |integer, >0, NOT NULL|
 
 
 ### **Item**
@@ -304,7 +304,7 @@ _______________
 | item_id |serial, NOT NULL |__Primary Key__|
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
-| cost |serial, NOT NULL|
+| cost |integer, >0, NOT NULL|
 
 
 ### **Appointment**
