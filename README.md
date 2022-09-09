@@ -8,7 +8,6 @@ _______________
 # Data requirements:
 
 
-
 ##  Veterinary clinics
 PerfectPets has many veterinary clinics located in the main cities of the US. The
 details of each clinic include the clinic number, clinic address (consisting of the
@@ -55,14 +54,6 @@ the pet owner. For example, treatments include:
 *A standard rate of **$20.00** is charged for each examination, which is recorded
 as a type of treatment*. The treatment number uniquely identifies each type of
 treatment and is used by all PerfectPets clinics.
-
-## Pet treatments
-Based on the results of the examination of a sick pet, the vet may propose one
-or more types of treatment. For each type of treatment, the information
-recorded includes the examination number and date, the pet number, name
-and type, treatment number, description, quantity of each type of treatment,
-and date the treatment is to begin and end. Any additional comments on the
-provision of each type of treatment are also recorded.
 
 
 ## Pens
@@ -119,46 +110,45 @@ _________________
 - Examination
 - Treatment
 - Pen 
-- PetTreatment
 - Invoice 
 - Appointment
 - Stock (with specializations Surgical, NonSurgical, and Pharmaceuticals)
 
-
 ______________________
 # Requirements: 
+
 
 1. **Compulsory functional requirements:**
    - User Authorization
    - User Management (CRUD)
-   - Role System
+   - Role System (Admin, Manager, Staff)
    - Logging
 
 2. **The database should be capable of supporting the following maintenance
 transactions:**
    - Create and maintain records recording the details of PerfectPets clinics
-and the members of staff at each clinic.
-   - Create and maintain records recording the details of pet owners.
-   - Create and maintain the details of pets.
-   - Create and maintain records recording the details of the types of treatments available for pets.
+and the members of staff at each clinic. (Admin)
+   - Create and maintain records recording the details of pet owners. (Admin, Manager)
+   - Create and maintain the details of pets. (Admin, Manager)
+   - Create and maintain records recording the details of the types of treatments available for pets. (Admin, Manger, Staff)
    - Create and maintain records recording the details of examinations and
-treatments given to pets.
+treatments given to pets.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of invoices to pet
-   owners for treatment to their pets.
-   - Create and maintain records recording the details of surgical, non-surgical, and pharmaceutical supplies at each clinic.
+   owners for treatment to their pets.  ( Admin, Manger, Staff)
+   - Create and maintain records recording the details of surgical, non-surgical, and pharmaceutical supplies at each clinic.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of pens available at
-   each clinic and the allocation of pets to pens.
-   - Create and maintain pet owner/pet appointments at each clinic.
+   each clinic and the allocation of pets to pens.  ( Admin, Manger, Staff)
+   - Create and maintain pet owner/pet appointments at each clinic.  ( Admin, Manger, Staff)
 
 3. **The database should be capable of supporting the following example query
 transactions:**
    - Present a report listing the Manager’s name, clinic address, and telephone number for each clinic, ordered by clinic number.
    - Present a report listing the names and owner numbers of pet owners
-   with the details of their pets.
-   - List the historic details of examinations for a given pet.
+   with the details of their pets. 
+   - List the historic details of examinations for a given pet. 
    - List the details of the treatments provided to a pet based on the results
    of a given examination.
-   - List the details of an unpaid invoice for a given pet owner.
+   - List the details of an unpaid invoice for a given pet owner. 
    - List the details of pens available on a given date for clinics in New York,
    ordered by clinic number.
    - Present a report that provides the total monthly salary for staff at each
@@ -179,17 +169,17 @@ ______________
 
 |Entity|   Attributes|
 | ---------- | ----------|
-|Clinic |clinicNo, address (street, city, state, zipCode), telNo, faxNo|
-|Staff |staffNo, sName (sFName, sLName), sAddress (sStreet, sCity, sState, sZipCode), sTelNo, DOB, sex, SSN, position, salary|
-|PetOwner |ownerNo, oName (oFName, oLName), oAddress (oStreet, oCity, oState, oZipCode), oTelNo|
-|Pet |petNo, petName, petType, petDescription, pDOB, dateRegistered, petStatus|
-|Examination |examNo, examDate, examTime, examResults|
-|Treatment |treatNo, description, cost|
-|Pen |penNo, penCapacity, penStatus|
-|Invoice |invoiceNo, invoiceDate, datePaid, paymentMethod|
-|Stock: Item| itemNo, itemName, itemDescription, itemCost|
-|Stock: Pharmacy| drugNo, drugName, drugDescription, dosage, methodAdmin, drugCost|
-|Appointment |appNo, aDate, aTime|
+|Clinic |id, address (street, city, state, zip_code), tel, fax|
+|Staff |id, name (first_name, last_name), address (street, city, state, zip_code), tel, DOB, sex, SSN, position, salary|
+|PetOwner |id, name (first_name, last_name), address (street, city, state, zip_code), tel|
+|Pet |id, name, type, description, DOB, date_registered, status|
+|Examination |id, date, time, results|
+|Treatment |id, description, cost|
+|Pen |id, capacity, status|
+|Invoice |id, date, date_paid, payment_method|
+|Stock: Item| id, name, description, cost|
+|Stock: Pharmacy| id, name, description, dosage, method_admin, cost|
+|Appointment |id, date, time|
 
 
 # Entities
@@ -198,55 +188,55 @@ ______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| clinicNo |integer value, NOT NULL |__Primary Key__|
-| street   |variable length character string, NOT NULL|
-| city     |variable length character string, NOT NULL|
-| state   | variable length character string, NOT NULL| Enumerated Type?|
-| zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY, Alternate Key |
-| telNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
-| faxNo    |variable length character string| Alternate Key|
-| mgrStaffNo   |integer value | __Foreign Key references Staff(staffNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| street   |VARCHAR(50), NOT NULL|
+| city     |VARCHAR(50), NOT NULL|
+| state   |VARCHAR(50), NOT NULL| Enumerated Type?|
+| zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY, Alternate Key |
+| tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
+| fax    |VARCHAR(50)| Alternate Key|
+| clinic_id   |serial, NOT NULL | __Foreign Key references Staff(id)__|
 
 **Staff** 
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| staffNo | integer value, NOT NULL |__Primary Key__|
-| sFName   |variable length character string, NOT NULL|
-| sLName     |variable length character string, NOT NULL|
-| sCity   |variable length character string, NOT NULL|
-| sState   | variable length character string, NOT NULL| Enumerated Type?|
-| sZipCode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
-| sTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
-| DOB   |date, NOT NULL|
-| SSN    |integer value, NOT NULL| Alternate Key|
-| position     |variable length character string, NOT NULL|
-| salary     |integer value, >0 |
-| clinicNo   |integer value | __Foreign Key references Clinic(clinicNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| first_name   |VARCHAR(50), NOT NULL|
+| last_name     |VARCHAR(50), NOT NULL|
+| city   |VARCHAR(50), NOT NULL|
+| state   | VARCHAR(50), NOT NULL| Enumerated Type?|
+| zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY|
+| tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
+| DOB   |DATE|
+| SSN    |CHAR(6), NOT NULL| Alternate Key|
+| position     |VARCHAR(50), NOT NULL|
+| salary     |serial, NOT NULL  |
+| clinic_id   | | __Foreign Key references Clinic(id)__|
 
 **Examination**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| examNo |integer value, NOT NULL |__Primary Key__|
-| examDate   |date, NOT NULL|
-| examTime     |time, NOT NULL | 
-| examResults   | variable length character string, NOT NULL|
-| petNo   | integer value, NOT NULL | __Foreign Key references Pet(petNo)__|
-| staffNo   | integer value, NOT NULL | __Foreign Key references Staff(staffNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| date   |DATE, NOT NULL|
+| time     |TIME, NOT NULL | 
+| results   | VARCHAR(500), NOT NULL|
+| pet_id   | | __Foreign Key references Pet(id)__|
+| staff_id   | | __Foreign Key references Staff(id)__|
 
 
 **PetOwner**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| ownerNo |integer value, NOT NULL |__Primary Key__|
-| oFName   |variable length character string, NOT NULL|
-| oLName     |variable length character string, NOT NULL|
-| oState   | variable length character string, NOT NULL| Enumerated Type?|
-| zipcode  |fixed length character string length 10, NOT NULL| XXXXX-YYYY|
-| oTelNo    |fixed length character string length 13, NOT NULL |+1 (three-digit area code) XXX-XXXX|
-| clinicNo   |integer value, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| first_name   | VARCHAR(50), NOT NULL|
+| last_name     | VARCHAR(50), NOT NULL|
+| state   |  VARCHAR(50), NOT NULL| Enumerated Type?|
+| zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY|
+| tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
+| clinic_id   | | __Foreign Key references Clinic(id)__|
 
 
 
@@ -254,24 +244,24 @@ ______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| petNo |integer value, NOT NULL |__Primary Key__|
-| petName   |variable length character string, NOT NULL|
-| petType     |variable length character string, NOT NULL|
-| petDescription   | variable length character string, NOT NULL|
-| pDOB   |date, NOT NULL|
-| dateRegistered   |date, NOT NULL|
-| petStatus|  boolean | indicating whether pen is healthy (1) or sick (0)|
-| clinicNo   |integer value, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
-| ownerNo   |integer value, NOT NULL| __Foreign Key references Owner(ownerNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| name   |VARCHAR(50), NOT NULL|
+| type     |VARCHAR(50), NOT NULL|
+| description   | VARCHAR(150)|
+| DOB   |DATE, NOT NULL|
+| date_registered   |DATE, NOT NULL|
+| status|  CHAR(1) | indicating whether pen is healthy (H) or sick (S), default H|
+| clinic_id   || __Foreign Key references Clinic(id)__|
+| owner_id   || __Foreign Key references Owner(id)__|
 
 
 **Treatment**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| treatNo |integer value, NOT NULL |__Primary Key__|
-| description   |variable length character string, NOT NULL|
-| cost      |integer value, >0 |
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| description   |VARCHAR(150), NOT NULL|
+| cost      |serial, NOT NULL|
 
 
 
@@ -279,54 +269,54 @@ ______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| penNo |integer value, NOT NULL |__Primary Key__|
-| penCapacity   |integer value, NOT NULL, DEFAULT 2, >=1 and <=4|
-| penStatus     | boolean | indicating whether pen is available (1) or not available (0)|
-| clinicNo   |integer value, NOT NULL| __Foreign Key references Clinic(clinicNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| capacity   |serial, NOT NULL, DEFAULT 2, >=1 and <=4|
+| status     | CHAR(1) | indicating whether pen is available (A) or not available (N), default A|
+| clinic_id   || __Foreign Key references Clinic(id)__|
 
 
 **Pharmacy**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| drugNo |integer value, NOT NULL |__Primary Key__|
-| drugName   |variable length character string, NOT NULL|
-| drugDescription   | variable length character string, NOT NULL|
-| dosage   | variable length character string, NOT NULL|
-| methodAdmin|  boolean | on prescription (1) or without (0)|
-| drugCost |integer value, >0 |
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| name   |VARCHAR(50), NOT NULL|
+| description   | VARCHAR(1500), NOT NULL |
+| dosage   | VARCHAR(150), NOT NULL|
+| method_admin|  CHAR(1) | on prescription (O) or without (W)|
+| cost |serial, NOT NULL|
 
 
 **Item**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| itemNo |integer value, NOT NULL |__Primary Key__|
-| itemName   |variable length character string, NOT NULL|
-| itemDescription   | variable length character string, NOT NULL|
-| itemCost  |integer value, >0 |
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| name   |VARCHAR(50), NOT NULL|
+| description   | VARCHAR(1500), NOT NULL |
+| cost |serial, NOT NULL|
 
 
 **Appointment**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| appNo |integer value, NOT NULL |__Primary Key__|
-| aDate   |date, NOT NULL|
-| aTime   |time, NOT NULL|
-| clinicNo   |integer value, NOT NULL| __Foreign Key references Pet(petNo)__|
+| id |CHAR(6),  NOT NULL |__Primary Key__|
+| date   |DATE, NOT NULL|
+| time   |TIME, NOT NULL|
+| pet_id   || __Foreign Key references Pet(id)__|
 
 
 **Invoice**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| invoiceNo |integer value, NOT NULL |__Primary Key__|
-| invoiceDate   |date, NOT NULL|
-| datePaid   |date, NOT NULL|
-| paymentMethod   | variable length character string, NOT NULL| Enumerated Type?|
-| examNo   |integer value, NOT NULL| __Foreign Key references Examination(examNo)__|
-| ownerNo   |integer value, NOT NULL| __Foreign Key references Owner(ownerNo)__|
+| id |CHAR(6), NOT NULL |__Primary Key__|
+| date   |DATE, NOT NULL|
+| date_paid   |DATE, NOT NULL|
+| payment_method   |VARCHAR(50),  NOT NULL| Enumerated Type?|
+| exam_id   || __Foreign Key references Examination(id)__|
+| owner_id   || __Foreign Key references Owner(id)__|
 
 
 
