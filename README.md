@@ -1,11 +1,14 @@
-# Perfect pets
+# Perfect pets by *Hanna Peshko 053501*
 Perfect pets provides private health care for domestic pets throughout the US. This service is provided through various clinics located in the main cities of the US. The director of PerfectPets is concerned that there is a lack of communication within the practice and particularly in the sharing of information and resources across the various clinics. To resolve this problem the director has requested the creation of a centralized database system to assist in the more effective and efficient running of the practice. 
 
 __________________
 ![My Remote Image](https://static01.nyt.com/images/2016/08/05/us/05onfire1_xp/05onfire1_xp-superJumbo-v2.jpg?quality=75&auto=webp)
-
-_______________
-# Data requirements:
+____________________
+ 
+# Project navigation
+![image](https://user-images.githubusercontent.com/93200268/189360910-a74e26c1-90b9-42ec-85f4-fad9331d68bb.png)
+___________
+# Data requirements
 
 
 ##  Veterinary clinics
@@ -99,9 +102,15 @@ name), home telephone number, the pet number, pet name, type of pet, and
 the appointment date and time. The appointment number is unique to a particular clinic
 
 
+__________________
+```
+Your advertisement
+   could be here 
+```
 _________________
 
-# Entities 
+
+# Entities descripton
 
 - Clinic
 - Staff
@@ -115,8 +124,7 @@ _________________
 - Stock (with specializations Surgical, NonSurgical, and Pharmaceuticals)
 
 ______________________
-# Requirements: 
-
+# Requirements
 
 1. **Compulsory functional requirements:**
    - User Authorization
@@ -162,6 +170,7 @@ transactions:**
    reordered at each clinic, ordered by clinic number.
 _______________
 # Database Design
+
 ![image](https://user-images.githubusercontent.com/93200268/189105002-7d5a07c5-8747-4dea-8a82-3c62dc73f68f.png)
 ______________
 
@@ -181,10 +190,12 @@ ______________
 |Stock: Pharmacy| id, name, description, dosage, method_admin, cost|
 |Appointment |id, date, time|
 
+_______________
+
 
 # Entities
 
-**Clinic**
+### **Clinic**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -194,10 +205,10 @@ ______________
 | state   |VARCHAR(50), NOT NULL| Enumerated Type?|
 | zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY, Alternate Key |
 | tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
-| fax    |VARCHAR(50)| Alternate Key|
-| clinic_id   |serial, NOT NULL | __Foreign Key references Staff(id)__|
+| fax    |VARCHAR(50), NOT NULL| Alternate Key|
+| clinic_id   || __Foreign Key references Staff(id)__|
 
-**Staff** 
+### **Staff** 
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -208,13 +219,13 @@ ______________
 | state   | VARCHAR(50), NOT NULL| Enumerated Type?|
 | zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY|
 | tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
-| DOB   |DATE|
+| DOB   |DATE, NOT NULL|
 | SSN    |CHAR(6), NOT NULL| Alternate Key|
 | position     |VARCHAR(50), NOT NULL|
 | salary     |serial, NOT NULL  |
 | clinic_id   | | __Foreign Key references Clinic(id)__|
 
-**Examination**
+### **Examination**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -226,7 +237,7 @@ ______________
 | staff_id   | | __Foreign Key references Staff(id)__|
 
 
-**PetOwner**
+### **PetOwner**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -239,8 +250,7 @@ ______________
 | clinic_id   | | __Foreign Key references Clinic(id)__|
 
 
-
-**Pet**
+### **Pet**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -250,32 +260,32 @@ ______________
 | description   | VARCHAR(150)|
 | DOB   |DATE, NOT NULL|
 | date_registered   |DATE, NOT NULL|
-| status|  CHAR(1) | indicating whether pen is healthy (H) or sick (S), default H|
+| status|  CHAR(1), NOT NULL| indicating whether pen is healthy (H) or sick (S), default H|
 | clinic_id   || __Foreign Key references Clinic(id)__|
 | owner_id   || __Foreign Key references Owner(id)__|
 
 
-**Treatment**
+### **Treatment**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
 | id |CHAR(6), NOT NULL |__Primary Key__|
-| description   |VARCHAR(150), NOT NULL|
+| description   |VARCHAR(1500), NOT NULL|
 | cost      |serial, NOT NULL|
 
 
 
-**Pen**
+### **Pen**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
 | id |CHAR(6), NOT NULL |__Primary Key__|
 | capacity   |serial, NOT NULL, DEFAULT 2, >=1 and <=4|
-| status     | CHAR(1) | indicating whether pen is available (A) or not available (N), default A|
+| status     | CHAR(1), NOT NULL | indicating whether pen is available (A) or not available (N), default A|
 | clinic_id   || __Foreign Key references Clinic(id)__|
 
 
-**Pharmacy**
+### **Pharmacy**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -283,11 +293,11 @@ ______________
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
 | dosage   | VARCHAR(150), NOT NULL|
-| method_admin|  CHAR(1) | on prescription (O) or without (W)|
+| method_admin|  CHAR(1), NOT NULL | on prescription (O) or without (W)|
 | cost |serial, NOT NULL|
 
 
-**Item**
+### **Item**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -297,7 +307,7 @@ ______________
 | cost |serial, NOT NULL|
 
 
-**Appointment**
+### **Appointment**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
@@ -307,7 +317,7 @@ ______________
 | pet_id   || __Foreign Key references Pet(id)__|
 
 
-**Invoice**
+### **Invoice**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
