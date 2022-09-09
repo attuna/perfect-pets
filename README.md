@@ -293,7 +293,7 @@ _______________
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
 | dosage   | VARCHAR(150), NOT NULL|
-| method_admin|  CHAR(1), NOT NULL | on prescription (O) or without (W)|
+| method_admin|  CHAR(1), NOT NULL |	indicating whether drug is available on prescription (O) or without (W)|
 | cost |serial, NOT NULL|
 
 
