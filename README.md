@@ -94,14 +94,6 @@ stock (this is ascertained on the last day of each month), reorder level, reorde
 quantity, and cost. The drug number uniquely identifies each type of pharmaceutical supply. The drug number is unique for each pharmaceutical supply.
 
 
-## Appointments
-If the pet requires to be seen by the vet at a later date, the owner and pet are
-given an appointment. The details of an appointment are recorded and include
-an appointment number, owner number, owner name (first name and last
-name), home telephone number, the pet number, pet name, type of pet, and
-the appointment date and time. The appointment number is unique to a particular clinic
-
-
 __________________
 ```
 Your advertisement
@@ -120,7 +112,6 @@ _________________
 - Treatment
 - Pen 
 - Invoice 
-- Appointment
 - Stock (with specializations Surgical, NonSurgical, and Pharmaceuticals)
 
 ______________________
@@ -146,7 +137,6 @@ treatments given to pets.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of surgical, non-surgical, and pharmaceutical supplies at each clinic.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of pens available at
    each clinic and the allocation of pets to pens.  ( Admin, Manger, Staff)
-   - Create and maintain pet owner/pet appointments at each clinic.  ( Admin, Manger, Staff)
 
 3. **The database should be capable of supporting the following example query
 transactions:**
@@ -163,7 +153,6 @@ transactions:**
    clinic, ordered by clinic number.
    - List the maximum, minimum, and average cost for treatments.
    - List the total number of pets in each pet type, ordered by pet type.
-   - List the appointments for a given date and for a particular clinic.
    - List the total number of pens in each clinic, ordered by clinic number.
    - List the pet number, name, and description of pets owned by a particular owner.
    - Present a report listing the pharmaceutical supplies that need to be
@@ -191,7 +180,6 @@ ______________
 |Invoice |id, date, date_paid, payment_method|
 |Stock: Item| id, name, description, cost|
 |Stock: Pharmacy| id, name, description, dosage, method_admin, cost|
-|Appointment |id, date, time|
 
 _______________
 
@@ -309,15 +297,6 @@ _______________
 | description   | VARCHAR(1500), NOT NULL |
 | cost |integer, >0, NOT NULL|
 
-
-### **Appointment**
-
-|   Column         |   Description   |   Additional info      | 
-| ---------------- | ------------- | ------------- |
-| appointment_id |serialr,  NOT NULL |__Primary Key__|
-| date   |DATE, NOT NULL|
-| time   |TIME, NOT NULL|
-| pet   || __Foreign Key references Pet(pet_id)__|
 
 
 ### **Invoice**
