@@ -208,6 +208,7 @@ _______________
 | last_name     |VARCHAR(50), NOT NULL|
 | city   |VARCHAR(50), NOT NULL|
 | state   | VARCHAR(50), NOT NULL| Enumerated Type?|
+| sex   |sex, NOT NULL| Enumerated Type|
 | zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY|
 | tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
 | DOB   |DATE, NOT NULL|
@@ -215,6 +216,8 @@ _______________
 | position     |VARCHAR(50), NOT NULL|
 | salary     |integer,>0, NOT NULL  |
 | clinic   | | __Foreign Key references Clinic(clinic_id)__|
+
+Enum sex ('male', 'female', 'other')
 
 ### **Examination**
 
