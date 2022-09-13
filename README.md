@@ -171,7 +171,10 @@ transactions:**
 _______________
 # Database Design
 
-![image](https://user-images.githubusercontent.com/93200268/189105002-7d5a07c5-8747-4dea-8a82-3c62dc73f68f.png)
+![image](https://user-images.githubusercontent.com/93200268/189854633-a9cd5279-1fd1-49ab-bea9-24e1826bcbc5.png)
+
+
+
 ______________
 
 # Attributes associated with entities:
