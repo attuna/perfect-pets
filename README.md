@@ -254,7 +254,7 @@ Enum sex ('male', 'female', 'other')
 | description   | VARCHAR(150)|
 | DOB   |DATE, NOT NULL|
 | date_registered   |DATE, NOT NULL|
-| status|  CHAR(1), NOT NULL| indicating whether pen is healthy (H) or sick (S), default H|
+| status|  BOOLEAN, NOT NULL| indicating whether pen is healthy (1) or sick (0), default H|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
 | owner   || __Foreign Key references Owner(owner_id)__|
 
@@ -275,7 +275,7 @@ Enum sex ('male', 'female', 'other')
 | ---------------- | ------------- | ------------- |
 | cage_id |serial, NOT NULL |__Primary Key__|
 | capacity   |integer, NOT NULL, DEFAULT 2, >=1 and <=4|
-| status     | CHAR(1), NOT NULL | indicating whether pen is available (A) or not available (N), default A|
+| status     | BOOLEAN, NOT NULL | indicating whether pen is available (1) or not available (0), default A|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
 
 
@@ -287,7 +287,7 @@ Enum sex ('male', 'female', 'other')
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
 | dosage   | VARCHAR(150), NOT NULL|
-| method_admin|  CHAR(1), NOT NULL |	indicating whether drug is available on prescription (O) or without (W)|
+| on_prescription|  BOOLEAN, NOT NULL |	indicating whether drug is available on prescription (1) or without (0)|
 | cost |integer, >0, NOT NULL|
 
 
