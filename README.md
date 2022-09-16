@@ -52,7 +52,7 @@ the pet owner. For example, treatments include:
 - T123 Penicillin antibiotic course $50.00
 - T155 Feline hysterectomy $200.00
 - T112 Vaccination course against feline flu $70.00 
-- T56 Small dog – stay in pen per day (includes feeding) $20.00 
+- T56 Small dog – stay in cage per day (includes feeding) $20.00 
 
 *A standard rate of **$20.00** is charged for each examination, which is recorded
 as a type of treatment*. The treatment number uniquely identifies each type of
@@ -62,13 +62,13 @@ treatment and is used by all PerfectPets clinics.
 ## Cages
 In some cases, it’s necessary for a sick pet to be admitted to the clinic. Each
 clinic has 20–30 animal cages, each capable of holding between one and four
-pets. Each pen has a unique pen number, capacity, and status (an indication of
+pets. Each cage has a unique cage number, capacity, and status (an indication of
 availability). The sick pet is allocated to a cage and the details of the pet, any
 treatment(s) required by the pet, and any additional comments about the care
-of the pet are recorded. The details of the pet’s stay in the pen are also noted,
-which include a pen number, and the date the pet was put into and taken out
-of the pen. Depending on the pet’s illness, there may be more than one pet in a
-pen at the same time. The pen number is unique to a particular clinic.
+of the pet are recorded. The details of the pet’s stay in the cage are also noted,
+which include a cage number, and the date the pet was put into and taken out
+of the cage. Depending on the pet’s illness, there may be more than one pet in a
+cage at the same time. The cage number is unique to a particular clinic.
 
 ## Invoices
 The pet owner is responsible for the cost of the treatment given to a pet.The
@@ -135,8 +135,8 @@ treatments given to pets.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of invoices to pet
    owners for treatment to their pets.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of surgical, non-surgical, and pharmaceutical supplies at each clinic.  ( Admin, Manger, Staff)
-   - Create and maintain records recording the details of pens available at
-   each clinic and the allocation of pets to pens.  ( Admin, Manger, Staff)
+   - Create and maintain records recording the details of cages available at
+   each clinic and the allocation of pets to cages.  ( Admin, Manger, Staff)
 
 3. **The database should be capable of supporting the following example query
 transactions:**
@@ -147,7 +147,7 @@ transactions:**
    - List the details of the treatments provided to a pet based on the results
    of a given examination.
    - List the details of an unpaid invoice for a given pet owner. 
-   - List the details of pens available on a given date for clinics in New York,
+   - List the details of cages available on a given date for clinics in New York,
    ordered by clinic number.
    - Present a report that provides the total monthly salary for staff at each
    clinic, ordered by clinic number.
@@ -180,6 +180,9 @@ ______________
 |Invoice |id, date, date_paid, payment_method|
 |Stock: Item| id, name, description, cost|
 |Stock: Pharmacy| id, name, description, dosage, method_admin, cost|
+
+_______________
+![27f44542-64e5-4b4c-9a30-39fa4fce02e5](https://user-images.githubusercontent.com/93200268/190670094-1c445a69-407e-4956-bc2d-0e082ca0f44c.jpg)
 
 _______________
 
@@ -254,7 +257,7 @@ Enum sex ('male', 'female', 'other')
 | description   | VARCHAR(150)|
 | DOB   |DATE, NOT NULL|
 | date_registered   |DATE, NOT NULL|
-| status|  BOOLEAN, NOT NULL| indicating whether pen is healthy (1) or sick (0), default H|
+| status|  BOOLEAN, NOT NULL| indicating whether pet is healthy (1) or sick (0), default H|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
 | owner   || __Foreign Key references Owner(owner_id)__|
 
@@ -275,7 +278,7 @@ Enum sex ('male', 'female', 'other')
 | ---------------- | ------------- | ------------- |
 | cage_id |serial, NOT NULL |__Primary Key__|
 | capacity   |integer, NOT NULL, DEFAULT 2, >=1 and <=4|
-| status     | BOOLEAN, NOT NULL | indicating whether pen is available (1) or not available (0), default A|
+| status     | BOOLEAN, NOT NULL | indicating whether cage is available (1) or not available (0), default A|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
 
 
