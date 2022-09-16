@@ -59,11 +59,11 @@ as a type of treatment*. The treatment number uniquely identifies each type of
 treatment and is used by all PerfectPets clinics.
 
 
-## Pens
+## Cages
 In some cases, it’s necessary for a sick pet to be admitted to the clinic. Each
-clinic has 20–30 animal pens, each capable of holding between one and four
+clinic has 20–30 animal cages, each capable of holding between one and four
 pets. Each pen has a unique pen number, capacity, and status (an indication of
-availability). The sick pet is allocated to a pen and the details of the pet, any
+availability). The sick pet is allocated to a cage and the details of the pet, any
 treatment(s) required by the pet, and any additional comments about the care
 of the pet are recorded. The details of the pet’s stay in the pen are also noted,
 which include a pen number, and the date the pet was put into and taken out
@@ -110,7 +110,7 @@ _________________
 - Pet
 - Examination
 - Treatment
-- Pen 
+- Cage
 - Invoice 
 - Stock (with specializations Surgical, NonSurgical, and Pharmaceuticals)
 
@@ -153,7 +153,7 @@ transactions:**
    clinic, ordered by clinic number.
    - List the maximum, minimum, and average cost for treatments.
    - List the total number of pets in each pet type, ordered by pet type.
-   - List the total number of pens in each clinic, ordered by clinic number.
+   - List the total number of cages in each clinic, ordered by clinic number.
    - List the pet number, name, and description of pets owned by a particular owner.
    - Present a report listing the pharmaceutical supplies that need to be
    reordered at each clinic, ordered by clinic number.
@@ -176,7 +176,7 @@ ______________
 |Pet |id, name, type, description, DOB, date_registered, status|
 |Examination |id, date, time, results|
 |Treatment |id, description, cost|
-|Pen |id, capacity, status|
+|Cage |id, capacity, status|
 |Invoice |id, date, date_paid, payment_method|
 |Stock: Item| id, name, description, cost|
 |Stock: Pharmacy| id, name, description, dosage, method_admin, cost|
@@ -269,11 +269,11 @@ Enum sex ('male', 'female', 'other')
 
 
 
-### **Pen**
+### **Cage**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| pen_id |serial, NOT NULL |__Primary Key__|
+| cage_id |serial, NOT NULL |__Primary Key__|
 | capacity   |integer, NOT NULL, DEFAULT 2, >=1 and <=4|
 | status     | CHAR(1), NOT NULL | indicating whether pen is available (A) or not available (N), default A|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
@@ -312,7 +312,6 @@ Enum sex ('male', 'female', 'other')
 | payment_method   |VARCHAR(50),  NOT NULL| Enumerated Type?|
 | exam  || __Foreign Key references Examination(exam_id)__|
 | owner   || __Foreign Key references Owner(owner_id)__|
-
 
 
 
