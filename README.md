@@ -323,3 +323,33 @@ _______________
 
 
 
+
+# Normalized tables
+
+### **Clinic**
+
+| Field         | Type            | Null            | Key              | Extra           |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT  | NOT NULL | PRIMARY KEY  | AUTO_INCREMENT |
+| address_id | INT | NOT NULL | FOREIGN KEY | UNIQUE |
+| contact_id | INT | NOT NULL | FOREIGN KEY | UNIQUE |
+
+
+### **Staff**
+
+| Field         | Type            | Null            | Key             | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | INT    | NOT NULL |  PRIMARY KEY  | AUTO_INCREMENT |
+| fullname_id  | INT | NOT NULL | FOREIGN KEY ||
+| address_id | INT | NOT NULL | FOREIGN KEY ||
+| contact_id | INT | NOT NULL | FOREIGN KEY | UNIQUE |
+| sex | ENUM('M', 'W') | NOT NULL |||
+| SSN | CHAR(6) | NOT NULL ||UNIQUE |
+| position | VARCHAR(50) | NOT NULL |||
+| salary | DECIMAL(10, 2) | NOT NULL || >0 |
+| center_id | INT | NOT NULL | FOREIGN KEY | |
+| role | ENUM("Admin", "Manager", "Stuff") | NOT NULL |||
+
+
+
+
