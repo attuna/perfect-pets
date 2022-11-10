@@ -174,12 +174,12 @@ ______________
 |Staff |id, name (first_name, last_name), address (street, city, state, zip_code), tel, DOB, sex, SSN, position, salary|
 |PetOwner |id, name (first_name, last_name), address (street, city, state, zip_code), tel|
 |Pet |id, name, type, description, DOB, date_registered, status|
-|Examination |id, date, time, results|
-|Treatment |id, description, cost|
-|Cage |id, capacity, status|
-|Invoice |id, date, date_paid, payment_method|
-|Stock: Item| id, name, description, cost|
-|Stock: Pharmacy| id, name, description, dosage, method_admin, cost|
+|Examination |id, date, time, results, staff_id, pet_id, treatment_id|
+|Treatment |id, description, cost, staff_id|
+|Cage |id, capacity, status, pet_id|
+|Invoice |id, date, date_paid, payment_method, treatment_id|
+|Stock: Item| id, name, description, cost, quantity|
+|Stock: Pharmacy| id, name, description, dosage, method_admin, cost, quantity|
 
 _______________
 ![27f44542-64e5-4b4c-9a30-39fa4fce02e5](https://user-images.githubusercontent.com/93200268/190670094-1c445a69-407e-4956-bc2d-0e082ca0f44c.jpg)
@@ -193,7 +193,7 @@ _______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| clinic_id |serial, NOT NULL |__Primary Key__|
+| clinic_id |int, NOT NULL |__Primary Key__|
 | street   |VARCHAR(50), NOT NULL|
 | city     |VARCHAR(50), NOT NULL|
 | state   |VARCHAR(50), NOT NULL| Enumerated Type?|
@@ -206,27 +206,26 @@ _______________
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| staff_id |serial, NOT NULL |__Primary Key__|
+| staff_id |int, NOT NULL |__Primary Key__|
 | first_name   |VARCHAR(50), NOT NULL|
 | last_name     |VARCHAR(50), NOT NULL|
 | city   |VARCHAR(50), NOT NULL|
-| state   | VARCHAR(50), NOT NULL| Enumerated Type?|
-| sex   |sex, NOT NULL| Enumerated Type|
+| street   | VARCHAR(50), NOT NULL| |
+| sex   |ENUM('M','W'), NOT NULL| Enumerated Type|
 | zip_code  |CHAR(10), NOT NULL| XXXXX-YYYY|
 | tel    |CHAR(13), NOT NULL |+1 (three-digit area code) XXX-XXXX, Alternate Key|
 | DOB   |DATE, NOT NULL|
 | SSN    |CHAR(6), NOT NULL| Alternate Key|
 | position     |VARCHAR(50), NOT NULL|
-| salary     |integer,>0, NOT NULL  |
+| salary     |int,>0, NOT NULL  |
 | clinic   | | __Foreign Key references Clinic(clinic_id)__|
-
-Enum sex ('male', 'female', 'other')
+| role | ENUM ("Admin", "Manager", "Stuff"), NOT NULL| | 
 
 ### **Examination**
 
 |   Column         |   Description   |   Additional info      | 
 | ---------------- | ------------- | ------------- |
-| exam_id |serial, NOT NULL |__Primary Key__|
+| exam_id |int, NOT NULL |__Primary Key__|
 | date   |DATE, NOT NULL|
 | time     |TIME, NOT NULL | 
 | results   | VARCHAR(500), NOT NULL|
@@ -272,6 +271,7 @@ Enum sex ('male', 'female', 'other')
 
 
 
+
 ### **Cage**
 
 |   Column         |   Description   |   Additional info      | 
@@ -280,6 +280,8 @@ Enum sex ('male', 'female', 'other')
 | capacity   |integer, NOT NULL, DEFAULT 2, >=1 and <=4|
 | status     | BOOLEAN, NOT NULL | indicating whether cage is available (1) or not available (0), default A|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
+| clinic   || __Foreign Key references Clinic(clinic_id)__|
+
 
 
 ### **Pharmacy**
@@ -292,6 +294,7 @@ Enum sex ('male', 'female', 'other')
 | dosage   | VARCHAR(150), NOT NULL|
 | on_prescription|  BOOLEAN, NOT NULL |	indicating whether drug is available on prescription (1) or without (0)|
 | cost |integer, >0, NOT NULL|
+| clinic   || __Foreign Key references Clinic(clinic_id)__|
 
 
 ### **Item**
@@ -302,6 +305,8 @@ Enum sex ('male', 'female', 'other')
 | name   |VARCHAR(50), NOT NULL|
 | description   | VARCHAR(1500), NOT NULL |
 | cost |integer, >0, NOT NULL|
+|quantity| int, >0, NOT NULL|
+| clinic   || __Foreign Key references Clinic(clinic_id)__|
 
 
 
@@ -312,7 +317,7 @@ Enum sex ('male', 'female', 'other')
 | invoice_id |serial, NOT NULL |__Primary Key__|
 | date   |DATE, NOT NULL|
 | date_paid   |DATE, NOT NULL|
-| payment_method   |VARCHAR(50),  NOT NULL| Enumerated Type?|
+| payment_method   |ENUM ('CARD', 'CASH','CHECK'),  NOT NULL| 
 | exam  || __Foreign Key references Examination(exam_id)__|
 | owner   || __Foreign Key references Owner(owner_id)__|
 
