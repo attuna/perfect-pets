@@ -426,7 +426,7 @@ _______________
 | name | VARCHAR(50) |  NOT NULL | UNIQUE |
 | description | TEXT |  NOT NULL ||
 | cost | DECIMAL(10, 2) |  NOT NULL | POSITIVE |
-| quantity | INT |  NOT NULL | FOREIGN KEY |POSITIVE |
+| quantity | INT |  NOT NULL |  |POSITIVE |
 | clinic_id | INT |  NOT NULL | FOREIGN KEY |  |
 
 
@@ -440,7 +440,7 @@ _______________
 | dosage | TEXT | NOT NULL |||
 | on_prescription | BOOLEAN | NOT NULL ||
 | cost | DECIMAL(10, 2) | NOT NULL || POSITIVE |
-| quantity | INT | NOT NULL | FOREIGN KEY | POSITIVE |
+| quantity | INT | NOT NULL |  | POSITIVE |
 | clinic_id | INT | NOT NULL | FOREIGN KEY | |
 
 
