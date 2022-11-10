@@ -349,7 +349,7 @@ _______________
 | sex | ENUM('M', 'W') | NOT NULL |||
 | SSN | CHAR(6) | NOT NULL ||UNIQUE |
 | position | VARCHAR(50) | NOT NULL |||
-| salary | DECIMAL(10, 2) | NOT NULL || >0 |
+| salary | INT | NOT NULL || >0 |
 | clinic_id | INT | NOT NULL | FOREIGN KEY | |
 | role | ENUM("Admin", "Manager", "Stuff") | NOT NULL |||
 
@@ -414,7 +414,7 @@ _______________
 | id | INT  | NOT NULL | PRIMARY KEY | NULL | AUTO_INCREMENT |
 | date_issue | DATE | NOT NULL || CHECK(date_issue <= CURRENT_DATE)|
 | date_paid | DATE | + || CHECK(date_paid <= CURRENT_DATE)|
-| cost | DECIMAL(10, 2) | NOT NULL || POSITIVE |
+| cost | INT | NOT NULL || POSITIVE |
 | payment_method | ENUM('CARD', 'CASH', 'CHECK') | + |
 
 
@@ -425,7 +425,7 @@ _______________
 | id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
 | name | VARCHAR(50) |  NOT NULL | UNIQUE |
 | description | TEXT |  NOT NULL ||
-| cost | DECIMAL(10, 2) |  NOT NULL | POSITIVE |
+| cost | INT |  NOT NULL | POSITIVE |
 | quantity | INT |  NOT NULL |  |POSITIVE |
 | clinic_id | INT |  NOT NULL | FOREIGN KEY |  |
 
@@ -439,7 +439,7 @@ _______________
 | description | TEXT | NOT NULL |||
 | dosage | TEXT | NOT NULL |||
 | on_prescription | BOOLEAN | NOT NULL ||
-| cost | DECIMAL(10, 2) | NOT NULL || POSITIVE |
+| cost | INT| NOT NULL || POSITIVE |
 | quantity | INT | NOT NULL |  | POSITIVE |
 | clinic_id | INT | NOT NULL | FOREIGN KEY | |
 
@@ -472,6 +472,10 @@ _______________
 | tel | CHAR(13) | NOT NULL |||
 | email | VARCHAR(50) | NOT NULL |||
 | fax | VARCHAR(50) | + |||
+
+_____________________________________
+https://lucid.app/lucidchart/9a866c44-cca9-4cd6-bdf7-6616ce99082b/edit?invitationId=inv_dca886ec-3a64-418d-8389-002b84fc2407
+___________________________________
 
 
 
