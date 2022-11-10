@@ -328,7 +328,7 @@ _______________
 
 ### **Clinic**
 
-| Field         | Type            | Null            | Key              | Extra           |
+| Field         | Type            | Null            | Key              |  Additional info  |
 |:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
 | id | INT  | NOT NULL | PRIMARY KEY  | AUTO_INCREMENT |
 | address_id | INT | NOT NULL | FOREIGN KEY | UNIQUE |
@@ -337,7 +337,7 @@ _______________
 
 ### **Staff**
 
-| Field         | Type            | Null            | Key             | Extra           |
+| Field         | Type            | Null            | Key             | Additional info |
 |:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
 | id | INT    | NOT NULL |  PRIMARY KEY  | AUTO_INCREMENT |
 | fullname_id  | INT | NOT NULL | FOREIGN KEY ||
@@ -349,6 +349,72 @@ _______________
 | salary | DECIMAL(10, 2) | NOT NULL || >0 |
 | center_id | INT | NOT NULL | FOREIGN KEY | |
 | role | ENUM("Admin", "Manager", "Stuff") | NOT NULL |||
+
+### **Pet**
+
+| Field         | Type            | Null            | Key             | Extra           |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT    | NOT NULL | PRIMARY KEY | AUTO_INCREMENT |
+| name  | VARCHAR(50) | NOT NULL |  ||
+| address_id | INT | NOT NULL | FOREIGN KEY ||
+| sex | ENUM('M', 'W') | NOT NULL |||
+| registration_date | DATE | NOT NULL | | CHECK(registration_date <= CURRENT_DATE)|
+| DOB| DATE| NOT NULL| ||
+| owner_id|  INT| NOT NULL| FOREIGN KEY ||
+
+### **Examination**
+
+| Field         | Type            | Null            | Key            | Extra           |
+|:------------- |:--------------- |:--------------- |:---------------|:--------------- |
+| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| time | DATETIME | NOT NULL | CHECK(time <= CURRENT_TIME)|
+| staff_id | INT |  NOT NULL |FOREIGN KEY||
+| pet_id | INT |  NOT NULL |FOREIGN KEY||
+| results | TEXT |  NOT NULL ||
+
+
+### **Treatment**
+
+| Field         | Type            | Null            | Key             | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | INT  | NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| description | TEXT | NOT NULL ||
+| staff_id | INT | NOT NULL | FOREIGN KEY||
+| invoice_id | INT | NOT NULL | FOREIGN KEY| UNIQUE |
+| examination_id | INT | NOT NULL | FOREIGN KEY||
+
+### **Cage**
+
+| Field         | Type            | Null            | Key             | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | INT  | NOT NULL |  PRIMARY KEY  | AUTO_INCREMENT |
+| size | ENUM('HEAD', 'SMALL', 'MEDIUM', 'LARGE') | NOT NULL ||
+| status |  BOOLEAN| NOT NULL | ||
+| pet_id | INT | + | FOREIGN KEY |UNIQUE |
+| clinic_id | INT | NOT NULL | FOREIGN KEY | |
+
+
+### **Invoice**
+
+| Field         | Type            | Null            | Key             | Extra           |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT  | NOT NULL | PRIMARY KEY | NULL | AUTO_INCREMENT |
+| date_issue | DATE | NOT NULL || CHECK(date_issue <= CURRENT_DATE)|
+| date_paid | DATE | + || CHECK(date_paid <= CURRENT_DATE)|
+| cost | DECIMAL(10, 2) | NOT NULL || POSITIVE |
+| payment_method | ENUM('CARD', 'CASH', 'CHECK') | + |
+
+
+### **StockItem**
+
+| Field         | Type            | Null            | Key              | Extra           |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| name | VARCHAR(50) |  NOT NULL | UNIQUE |
+| description | TEXT |  NOT NULL ||
+| cost | DECIMAL(10, 2) |  NOT NULL | POSITIVE |
+| quantity | INT |  NOT NULL | FOREIGN KEY |POSITIVE |
+| clinic_id | INT |  NOT NULL | FOREIGN KEY |  |
 
 
 
