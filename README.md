@@ -182,7 +182,7 @@ ______________
 |Stock: Pharmacy| id, name, description, dosage, method_admin, cost, quantity|
 
 _______________
-![27f44542-64e5-4b4c-9a30-39fa4fce02e5](https://user-images.githubusercontent.com/93200268/190670094-1c445a69-407e-4956-bc2d-0e082ca0f44c.jpg)
+![image](https://user-images.githubusercontent.com/93200268/201181763-074005b2-d863-4f9e-b8cc-eeb109f18b4d.png)
 
 _______________
 
