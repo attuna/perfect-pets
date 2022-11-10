@@ -160,7 +160,7 @@ transactions:**
 _______________
 # Database Design
 
-![image](https://user-images.githubusercontent.com/93200268/189854633-a9cd5279-1fd1-49ab-bea9-24e1826bcbc5.png)
+![image](https://user-images.githubusercontent.com/93200268/201181763-074005b2-d863-4f9e-b8cc-eeb109f18b4d.png)
 
 
 
@@ -180,9 +180,6 @@ ______________
 |Invoice |id, date, date_paid, payment_method, treatment_id|
 |Stock: Item| id, name, description, cost, quantity|
 |Stock: Pharmacy| id, name, description, dosage, method_admin, cost, quantity|
-
-_______________
-![image](https://user-images.githubusercontent.com/93200268/201181763-074005b2-d863-4f9e-b8cc-eeb109f18b4d.png)
 
 _______________
 
