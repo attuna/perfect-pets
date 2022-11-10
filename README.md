@@ -323,8 +323,11 @@ _______________
 
 
 
+_______________
 
 # Normalized tables
+_______________
+
 
 ### **Clinic**
 
@@ -347,24 +350,34 @@ _______________
 | SSN | CHAR(6) | NOT NULL ||UNIQUE |
 | position | VARCHAR(50) | NOT NULL |||
 | salary | DECIMAL(10, 2) | NOT NULL || >0 |
-| center_id | INT | NOT NULL | FOREIGN KEY | |
+| clinic_id | INT | NOT NULL | FOREIGN KEY | |
 | role | ENUM("Admin", "Manager", "Stuff") | NOT NULL |||
 
 ### **Pet**
 
-| Field         | Type            | Null            | Key             | Extra           |
+| Field         | Type            | Null            | Key             | Additional info   |
 |:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
 | id | INT    | NOT NULL | PRIMARY KEY | AUTO_INCREMENT |
 | name  | VARCHAR(50) | NOT NULL |  ||
 | address_id | INT | NOT NULL | FOREIGN KEY ||
 | sex | ENUM('M', 'W') | NOT NULL |||
-| registration_date | DATE | NOT NULL | | CHECK(registration_date <= CURRENT_DATE)|
 | DOB| DATE| NOT NULL| ||
 | owner_id|  INT| NOT NULL| FOREIGN KEY ||
 
+### **PetOwner**
+
+| Field         | Type            | Null            | Key             | Additional info   |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT    | NOT NULL | PRIMARY KEY || AUTO_INCREMENT |
+| fullname_id  | INT |  NOT NULL |  FOREIGN KEY ||
+| address_id | INT | NOT NULL |  FOREIGN KEY ||
+| contact_id  | INT | NOT NULL |  FOREIGN KEY | |UNIQUE |
+| sex | ENUM('M', 'W') | NOT NULL ||
+| registration_date | DATE | NOT NULL | | CHECK(registration_date <= CURRENT_DATE)|
+
 ### **Examination**
 
-| Field         | Type            | Null            | Key            | Extra           |
+| Field         | Type            | Null            | Key            | Additional info  |
 |:------------- |:--------------- |:--------------- |:---------------|:--------------- |
 | id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
 | time | DATETIME | NOT NULL | CHECK(time <= CURRENT_TIME)|
@@ -375,7 +388,7 @@ _______________
 
 ### **Treatment**
 
-| Field         | Type            | Null            | Key             | Extra           |
+| Field         | Type            | Null            | Key             | Additional info  |
 |:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
 | id | INT  | NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
 | description | TEXT | NOT NULL ||
@@ -385,7 +398,7 @@ _______________
 
 ### **Cage**
 
-| Field         | Type            | Null            | Key             | Extra           |
+| Field         | Type            | Null            | Key             |  Additional info   |
 |:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
 | id | INT  | NOT NULL |  PRIMARY KEY  | AUTO_INCREMENT |
 | size | ENUM('HEAD', 'SMALL', 'MEDIUM', 'LARGE') | NOT NULL ||
@@ -396,7 +409,7 @@ _______________
 
 ### **Invoice**
 
-| Field         | Type            | Null            | Key             | Extra           |
+| Field         | Type            | Null            | Key             | Additional info   |
 |:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
 | id | INT  | NOT NULL | PRIMARY KEY | NULL | AUTO_INCREMENT |
 | date_issue | DATE | NOT NULL || CHECK(date_issue <= CURRENT_DATE)|
@@ -407,7 +420,7 @@ _______________
 
 ### **StockItem**
 
-| Field         | Type            | Null            | Key              | Extra           |
+| Field         | Type            | Null            | Key              | Additional info   |
 |:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
 | id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
 | name | VARCHAR(50) |  NOT NULL | UNIQUE |
@@ -415,6 +428,51 @@ _______________
 | cost | DECIMAL(10, 2) |  NOT NULL | POSITIVE |
 | quantity | INT |  NOT NULL | FOREIGN KEY |POSITIVE |
 | clinic_id | INT |  NOT NULL | FOREIGN KEY |  |
+
+
+### **StockPharmacy**
+
+| Field         | Type            | Null            | Key             | Additional info  |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| name | VARCHAR(50) | NOT NULL || UNIQUE |
+| description | TEXT | NOT NULL |||
+| dosage | TEXT | NOT NULL |||
+| on_prescription | BOOLEAN | NOT NULL ||
+| cost | DECIMAL(10, 2) | NOT NULL || POSITIVE |
+| quantity | INT | NOT NULL | FOREIGN KEY | POSITIVE |
+| clinic_id | INT | NOT NULL | FOREIGN KEY | |
+
+
+### **Address**
+
+| Field         | Type            | Null            | Key             | Additional info  |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| city | VARCHAR(50) |  NOT NULL  |||
+| street | VARCHAR(50) |  NOT NULL  |||
+| home | VARCHAR(50) |  NOT NULL  |||
+
+
+### **Fullname**
+
+| Field         | Type            | Null            | Key             | Additional info  |
+|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
+| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| first_name  | VARCHAR(50) | NOT NULL |
+| middle_name | VARCHAR(50) | NOT NULL ||
+| last_name   | VARCHAR(50) | NOT NULL ||
+
+
+### **Contact**
+
+| Field         | Type            | Null            | Key             | Additional info  |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
+| tel | CHAR(13) | NOT NULL |||
+| email | VARCHAR(50) | NOT NULL |||
+| fax | VARCHAR(50) | + |||
+
 
 
 
