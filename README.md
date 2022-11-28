@@ -80,20 +80,6 @@ Additional data is also recorded on the payment of the invoice, including the
 date the invoice was paid and the method of payment (for example, check,
 cash, credit card). The invoice number is unique.
 
-## Surgical, non-surgical, and pharmaceutical supplies
-Each clinic maintains a stock of surgical supplies (for example, syringes, sterile
-dressings, bandages) and non-surgical supplies (for example, plastic bags,
-aprons, litter trays, pet name tags, pet food). The details of surgical and nonsurgical supplies include the item number and name, item description, quantity
-in stock (this is ascertained on the last day of each month), reorder level,
-reorder quantity, and cost. The item number uniquely identifies each type of
-surgical or non-surgical supply. The item number is unique for each surgical or
-non-surgical item and used throughout the practice. Each clinic also maintains a stock of pharmaceutical supplies (for example,
-antibiotics, pain killers). The details of pharmaceutical supplies include a drug
-number and name, description, dosage, method of administration, quantity in
-stock (this is ascertained on the last day of each month), reorder level, reorder
-quantity, and cost. The drug number uniquely identifies each type of pharmaceutical supply. The drug number is unique for each pharmaceutical supply.
-
-
 __________________
 ```
 Your advertisement
@@ -112,7 +98,6 @@ _________________
 - Treatment
 - Cage
 - Invoice 
-- Stock (with specializations Surgical, NonSurgical, and Pharmaceuticals)
 
 ______________________
 # Requirements
@@ -134,7 +119,6 @@ and the members of staff at each clinic. (Admin)
 treatments given to pets.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of invoices to pet
    owners for treatment to their pets.  ( Admin, Manger, Staff)
-   - Create and maintain records recording the details of surgical, non-surgical, and pharmaceutical supplies at each clinic.  ( Admin, Manger, Staff)
    - Create and maintain records recording the details of cages available at
    each clinic and the allocation of pets to cages.  ( Admin, Manger, Staff)
 
@@ -155,8 +139,7 @@ transactions:**
    - List the total number of pets in each pet type, ordered by pet type.
    - List the total number of cages in each clinic, ordered by clinic number.
    - List the pet number, name, and description of pets owned by a particular owner.
-   - Present a report listing the pharmaceutical supplies that need to be
-   reordered at each clinic, ordered by clinic number.
+
 _______________
 # Database Design
 
@@ -178,8 +161,7 @@ ______________
 |Treatment |id, description, cost, staff_id|
 |Cage |id, capacity, status, pet_id|
 |Invoice |id, date, date_paid, payment_method, treatment_id|
-|Stock: Item| id, name, description, cost, quantity|
-|Stock: Pharmacy| id, name, description, dosage, method_admin, cost, quantity|
+
 
 _______________
 
@@ -277,32 +259,6 @@ _______________
 | capacity   |integer, NOT NULL, DEFAULT 2, >=1 and <=4|
 | status     | BOOLEAN, NOT NULL | indicating whether cage is available (1) or not available (0), default A|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
-| clinic   || __Foreign Key references Clinic(clinic_id)__|
-
-
-
-### **Pharmacy**
-
-|   Column         |   Description   |   Additional info      | 
-| ---------------- | ------------- | ------------- |
-| pharmacy_id |serial, NOT NULL |__Primary Key__|
-| name   |VARCHAR(50), NOT NULL|
-| description   | VARCHAR(1500), NOT NULL |
-| dosage   | VARCHAR(150), NOT NULL|
-| on_prescription|  BOOLEAN, NOT NULL |	indicating whether drug is available on prescription (1) or without (0)|
-| cost |integer, >0, NOT NULL|
-| clinic   || __Foreign Key references Clinic(clinic_id)__|
-
-
-### **Item**
-
-|   Column         |   Description   |   Additional info      | 
-| ---------------- | ------------- | ------------- |
-| item_id |serial, NOT NULL |__Primary Key__|
-| name   |VARCHAR(50), NOT NULL|
-| description   | VARCHAR(1500), NOT NULL |
-| cost |integer, >0, NOT NULL|
-|quantity| int, >0, NOT NULL|
 | clinic   || __Foreign Key references Clinic(clinic_id)__|
 
 
@@ -413,32 +369,6 @@ _______________
 | date_paid | DATE | + || CHECK(date_paid <= CURRENT_DATE)|
 | cost | INT | NOT NULL || POSITIVE |
 | payment_method | ENUM('CARD', 'CASH', 'CHECK') | + |
-
-
-### **StockItem**
-
-| Field         | Type            | Null            | Key              | Additional info   |
-|:------------- |:--------------- |:--------------- |:---------------  |:--------------- |
-| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
-| name | VARCHAR(50) |  NOT NULL | UNIQUE |
-| description | TEXT |  NOT NULL ||
-| cost | INT |  NOT NULL | POSITIVE |
-| quantity | INT |  NOT NULL |  |POSITIVE |
-| clinic_id | INT |  NOT NULL | FOREIGN KEY |  |
-
-
-### **StockPharmacy**
-
-| Field         | Type            | Null            | Key             | Additional info  |
-|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |
-| id | INT  |  NOT NULL | PRIMARY KEY |  AUTO_INCREMENT |
-| name | VARCHAR(50) | NOT NULL || UNIQUE |
-| description | TEXT | NOT NULL |||
-| dosage | TEXT | NOT NULL |||
-| on_prescription | BOOLEAN | NOT NULL ||
-| cost | INT| NOT NULL || POSITIVE |
-| quantity | INT | NOT NULL |  | POSITIVE |
-| clinic_id | INT | NOT NULL | FOREIGN KEY | |
 
 
 ### **Address**
