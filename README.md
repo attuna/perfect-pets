@@ -1,4 +1,4 @@
-# Perfect pets by *Hanna Peshko 053501*
+# Perfect pets by *Hanna Peshko *
 Perfect pets provides private health care for domestic pets throughout the US. This service is provided through various clinics located in the main cities of the US. The director of PerfectPets is concerned that there is a lack of communication within the practice and particularly in the sharing of information and resources across the various clinics. To resolve this problem the director has requested the creation of a centralized database system to assist in the more effective and efficient running of the practice. 
 
 __________________
